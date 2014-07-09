@@ -125,20 +125,7 @@ public class GraphViz
 	}
 
 	/**
-	 * Returns the graph as an image in binary format.
-	 * @param dot_source Source of the graph to be drawn.
-	 * @param type Type of the output image to be produced, e.g.: gif, dot, fig, pdf, ps, svg, png.
-	 * @param representationType Type of how you want to represent the graph:
-	 * <ul>
-	 * 	<li>dot</li>
-	 * 	<li>neato</li>
-	 * 	<li>fdp</li>
-	 * 	<li>sfdp</li>
-	 * 	<li>twopi</li>
-	 * 	<li>circo</li>
-	 * </ul>
-	 * @see http://www.graphviz.org under the Roadmap title
-	 * @return A byte array containing the image of the graph.
+	 * Returns the graph as an image in binary format. 
 	 */
 	public byte[] getGraph(String dot_source, String type, String representationType)
 	{
@@ -321,4 +308,4 @@ public class GraphViz
 		this.graph = sb;
 	}
 
-} // end of class GraphViz
+} 
