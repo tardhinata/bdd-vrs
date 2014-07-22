@@ -13,10 +13,10 @@
  */
 public class QElement {
     private int[] key;
-    private Vertex vertex;
+    private XVertex vertex;
     
     /** Creates a new instance of QElement */
-    public QElement(int[] key, Vertex vertex) { 
+    public QElement(int[] key, XVertex vertex) { 
         this.key = key;
         this.vertex = vertex;
     }
@@ -25,7 +25,7 @@ public class QElement {
         return key;
     }
     
-    public Vertex getVertex() {
+    public XVertex getVertex() {
         return vertex;
     } 
 }

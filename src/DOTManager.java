@@ -13,16 +13,12 @@ import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.Properties;
  
-public class GraphViz
+public class DOTManager
 {
-	/**
-	 * Detects the client's operating system.
-	 */
+	//Detects the client's operating system. 
 	private final static String osName = System.getProperty("os.name").replaceAll("\\s",""); 
 
-	/**
-	 * Load the config.properties file.
-	 */
+	//Load the config.properties file. 
 	private final static String cfgProp = "config.properties";
 	private final static Properties configFile = new Properties() { 		
 		private final static long serialVersionUID = 1L; {
@@ -35,39 +31,26 @@ public class GraphViz
 		}
 	};
 
-	/**
-	 * The dir. where temporary files will be created.
-	 */
+	//The dir. where temporary files will be created. 
 	private static String TEMP_DIR = configFile.getProperty("tempDirFor" + osName);
 
-	/**
-	 * Where is your dot program located? It will be called externally.
-	 */
+	//Where is your dot program located? It will be called externally. 
 	private static String DOT = configFile.getProperty("dotFor" + osName);
 
-	/**
-	 * The image size in dpi. 96 dpi is normal size. Higher values are 10% higher each.
-	 * Lower values 10% lower each. 
-	 */
+	//DPI Size of image
 	private int[] dpiSizes = {46, 51, 57, 63, 70, 78, 86, 96, 106, 116, 128, 141, 155, 170, 187, 206, 226, 249};
 
-	/**
-	 * Define the index in the image size array.
-	 */
+	//Define the index in the image size array. 
 	private int currentDpiPos = 7;
 
-	/**
-	 * Increase the image size (dpi).
-	 */
+	//Increase the image size (dpi). 
 	public void increaseDpi() {
 		if ( this.currentDpiPos < (this.dpiSizes.length - 1) ) {
 			++this.currentDpiPos;
 		}
 	}
 
-	/**
-	 * Decrease the image size (dpi).
-	 */
+	//Decrease the image size (dpi). 
 	public void decreaseDpi() {
 		if (this.currentDpiPos > 0) {
 			--this.currentDpiPos;
@@ -78,44 +61,31 @@ public class GraphViz
 		return this.dpiSizes[this.currentDpiPos];
 	}
 
-	/**
-	 * The source of the graph written in dot language.
-	 */
+	//The source of the graph written in dot language. 
 	private StringBuilder graph = new StringBuilder();
 
-	/**
-	 * Constructor: creates a new GraphViz object that will contain
-	 * a graph.
-	 */
-	public GraphViz() {
-		// empty
-	}
+	//Constructor:  
+	public DOTManager() { }
 
 	/**
-	 * Returns the graph's source description in dot language.
-	 * @return Source of the graph in dot language.
+	 * Returns the graph's source description in dot format.
+	 * @return Source of the graph in dot format.
 	 */
 	public String getDotSource() {
 		return this.graph.toString();
 	}
 
-	/**
-	 * Adds a string to the graph's source (without newline).
-	 */
+	//Adds a string to the graph's source (without newline). 
 	public void add(String line) {
 		this.graph.append(line);
 	}
 
-	/**
-	 * Adds a string to the graph's source (with newline).
-	 */
+	//Adds a string to the graph's source (with newline). 
 	public void addln(String line) {
 		this.graph.append(line + "\n");
 	}
 
-	/**
-	 * Adds a newline to the graph's source.
-	 */
+	//Adds a newline to the graph's source. 
 	public void addln() {
 		this.graph.append('\n');
 	}
@@ -124,9 +94,7 @@ public class GraphViz
 		this.graph = new StringBuilder();
 	}
 
-	/**
-	 * Returns the graph as an image in binary format. 
-	 */
+	//Returns the graph as an image in binary format.  
 	public byte[] getGraph(String dot_source, String type, String representationType)
 	{
 		File dot;
@@ -146,9 +114,7 @@ public class GraphViz
 	}
 
 	/**
-	 * Writes the graph's image in a file.
-	 * @param img   A byte array containing the image of the graph.
-	 * @param file  Name of the file to where we want to write.
+	 * Writes the graph's image in a file. 
 	 * @return Success: 1, Failure: -1
 	 */
 	public int writeGraphToFile(byte[] img, String file)
@@ -158,9 +124,7 @@ public class GraphViz
 	}
 
 	/**
-	 * Writes the graph's image in a file.
-	 * @param img   A byte array containing the image of the graph.
-	 * @param to    A File object to where we want to write.
+	 * Writes the graph's image in a file. 
 	 * @return Success: 1, Failure: -1
 	 */
 	public int writeGraphToFile(byte[] img, File to)
@@ -174,21 +138,10 @@ public class GraphViz
 	}
 
 	/**
-	 * It will call the external dot program, and return the image in
-	 * binary format.
-	 * @param dot Source of the graph (in dot language).
+	 * It will call the external dot program, and return the image in binary format.
+	 * @param dot Source of the graph (in dot language). 
 	 * @param type Type of the output image to be produced, e.g.: gif, dot, fig, pdf, ps, svg, png.
-	 * @param representationType Type of how you want to represent the graph:
-	 * <ul>
-	 * 	<li>dot</li>
-	 * 	<li>neato</li>
-	 * 	<li>fdp</li>
-	 * 	<li>sfdp</li>
-	 * 	<li>twopi</li>
-	 * 	<li>circo</li>
-	 * </ul>
-	 * @see http://www.graphviz.org under the Roadmap title
-	 * @return The image of the graph in .gif format.
+	 * @param representationType Type of how you want to represent the graph: dot, neato, fdp, sfdp, twopi, circo
 	 */
 	private byte[] get_img_stream(File dot, String type, String representationType)
 	{
@@ -196,7 +149,7 @@ public class GraphViz
 		byte[] img_stream = null;
 
 		try {
-			img = File.createTempFile("graph_", "."+type, new File(GraphViz.TEMP_DIR));
+			img = File.createTempFile("graph_", "."+type, new File(DOTManager.TEMP_DIR));
 			Runtime rt = Runtime.getRuntime();
  
 			String[] args = {DOT, "-T"+type, "-K"+representationType, "-Gdpi="+dpiSizes[this.currentDpiPos], dot.getAbsolutePath(), "-o", img.getAbsolutePath()};
@@ -213,7 +166,7 @@ public class GraphViz
 				System.err.println("Warning: " + img.getAbsolutePath() + " could not be deleted!");
 		}
 		catch (java.io.IOException ioe) {
-			System.err.println("Error:    in I/O processing of tempfile in dir " + GraphViz.TEMP_DIR+"\n");
+			System.err.println("Error:    in I/O processing of tempfile in dir " + DOTManager.TEMP_DIR+"\n");
 			System.err.println("       or in calling external command");
 			ioe.printStackTrace();
 		}
@@ -225,17 +178,12 @@ public class GraphViz
 		return img_stream;
 	}
 
-	/**
-	 * Writes the source of the graph in a file, and returns the written file
-	 * as a File object.
-	 * @param str Source of the graph (in dot language).
-	 * @return The file (as a File object) that contains the source of the graph.
-	 */
+	//Writes the source of the graph in a file, and returns the written file   
 	private File writeDotSourceToFile(String str) throws java.io.IOException
 	{
 		File temp;
 		try { 
-			temp = File.createTempFile("graph_", ".dot.tmp", new File(GraphViz.TEMP_DIR));
+			temp = File.createTempFile("graph_", ".dot.tmp", new File(DOTManager.TEMP_DIR));
 			FileWriter fout = new FileWriter(temp);
 			fout.write(str);
 			fout.close();
@@ -247,45 +195,27 @@ public class GraphViz
 		return temp;
 	}
 
-	/**
-	 * Returns a string that is used to start a graph.
-	 * @return A string to open a graph.
-	 */
+	// Returns a string that is used to start a graph. 
 	public String start_graph() {
 		return "digraph G {";
 	}
 
-	/**
-	 * Returns a string that is used to end a graph.
-	 * @return A string to close a graph.
-	 */
+	//Returns a string that is used to end a graph. 
 	public String end_graph() {
 		return "}";
 	}
 
-	/**
-	 * Takes the cluster or subgraph id as input parameter and returns a string
-	 * that is used to start a subgraph.
-	 * @return A string to open a subgraph.
-	 */
+	//Return a string to open a subgraph. 
 	public String start_subgraph(int clusterid) {
 		return "subgraph cluster_" + clusterid + " {";
 	}
 
-	/**
-	 * Returns a string that is used to end a graph.
-	 * @return A string to close a graph.
-	 */
+	//Returns a string that is used to close a graph. 
 	public String end_subgraph() {
 		return "}";
 	}
 
-	/**
-	 * Read a DOT graph from a text file.
-	 * 
-	 * @param input Input text file containing the DOT graph
-	 * source.
-	 */
+	//Read a DOT graph from a text file. 
 	public void readSource(String input)
 	{
 		StringBuilder sb = new StringBuilder();

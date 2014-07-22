@@ -6,11 +6,11 @@
 
 import java.io.File;
 
-public class VisualizationExample
+public class DOTVisualizationExample
 {
 	public static void main(String[] args)
 	{
-		VisualizationExample p = new VisualizationExample();
+		DOTVisualizationExample p = new DOTVisualizationExample();
 		p.start();
 		//p.start2();
 	}
@@ -21,7 +21,7 @@ public class VisualizationExample
 	 */
 	private void start()
 	{
-		GraphViz gv = new GraphViz();
+		DOTManager gv = new DOTManager();
 		gv.addln(gv.start_graph());
 		gv.addln("A -> B;");
 		gv.addln("A -> C;");
@@ -41,7 +41,7 @@ public class VisualizationExample
 		String repesentationType= "dot";
 		//		String repesentationType= "neato, fdp, sfdp, twopi, circo"; 
 		
-		File out = new File(dir + "/graph/output." + type); 
+		File out = new File(dir + "/graph/output_example." + type); 
 		byte[] graph = gv.getGraph(gv.getDotSource(), type, repesentationType); 
 		int res = gv.writeGraphToFile(graph , out );
 		if(res==1)
@@ -55,9 +55,9 @@ public class VisualizationExample
 	private void start2()
 	{
 		String dir =  System.getProperty("user.dir");
-		String input = dir + "/graph/CitationNetwork.gv"; 
+		String input = dir + "/graph/simple.gv"; 
 		
-		GraphViz gv = new GraphViz();
+		DOTManager gv = new DOTManager();
 		gv.readSource(input);
 		System.out.println(gv.getDotSource());
 
@@ -68,7 +68,7 @@ public class VisualizationExample
 		String repesentationType= "dot";
 		//		String repesentationType= "neato, fdp, sfdp, twopi, circo"; 
 		
-		File out = new File(dir + "/graph/output." + type); 
+		File out = new File(dir + "/graph/simple." + type); 
 		byte[] graph = gv.getGraph(gv.getDotSource(), type, repesentationType); 
 		int res = gv.writeGraphToFile(graph , out );
 		if(res==1)

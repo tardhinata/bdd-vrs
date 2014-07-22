@@ -22,28 +22,25 @@ public class Main {
     }
     
     public static void main(String args[]) {
-        Vertex v6 = new Vertex(null, null, 4, 0, 6, false);
-        Vertex v7 = new Vertex(null, null, 4, 1, 7, false);
-        Vertex v8 = new Vertex(null, null, 4, 0, 8, false);
-        Vertex v9 = new Vertex(null, null, 4, 1, 9, false);
-        Vertex v4 = new Vertex(v8, v7, 3, -1, 4, false);
-        Vertex v5 = new Vertex(v8, v9, 3, -1, 5, false);
-        Vertex v2 = new Vertex(v6, v4, 2, -1, 2, false);
-        Vertex v3 = new Vertex(v4, v5, 2, -1, 3, false);
-        Vertex v1 = new Vertex(v2, v3, 1, -1, 1, false); 
+       
+        BDDManager mng1 = new BDDManager("Manager1");
+        String[] vars = {"x","y","z"};
+        mng1.setOrderedVariables(vars);
         
         
-        System.out.print("Traverse : ");
-        BDDOperations.traverse(v2);
-        System.out.println();
-        System.out.println("Satisfy count = " + BDDOperations.satisfyCount(v2));  
-        //System.out.println();
-        //Vertex v = BDDOperations.reduce(v1); 
-        /*Vertex v4 = new Vertex(null, null, 4, 0, 4, false);
-        Vertex v5 = new Vertex(null, null, 4, 1, 5, false);
-        Vertex v3 = new Vertex(v4, v5, 3, -1, 3, false);
-        Vertex v2 = new Vertex(v4, v3, 2, -1, 2, false);
-        Vertex v1 = new Vertex(v2, v3, 1, -1, 1, false); */
+        XVertex x = mng1.getBDD("x");
+        XVertex negx = mng1.getBDD("-x");
+        XVertex y = mng1.getBDD("y");
+        XVertex negy = mng1.getBDD("-y");
+        XVertex z = mng1.getBDD("z");
+        XVertex negz = mng1.getBDD("-z");
+        
+        XVertex u = mng1.apply(negx, negz, "OR", "-xOR-z");
+        XVertex v = mng1.apply(x,y, "AND", "xANDy");
+        XVertex w = mng1.apply(u,v, "OR", "(negxORnegz)OR(xANDy)");
+        System.out.println("DOT format:");
+        mng1.printDOT(w);
+        System.out.println("Satisfy count: " + mng1.satisfyCount(w));
     }
     
 }
