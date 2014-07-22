@@ -15,10 +15,7 @@ public class DOTVisualizationExample
 		//p.start2();
 	}
 
-	/**
-	 * Construct a DOT graph programmatically in memory
-	 * to image and store the image in the file system.
-	 */
+	// Construct a DOT graph programmatically and store the image in the file system. 
 	private void start()
 	{
 		DOTManager gv = new DOTManager();
@@ -48,10 +45,7 @@ public class DOTVisualizationExample
 			System.out.println("Success export graph to: "+out.getAbsolutePath());
 	}
 
-	/**
-	 * Read the DOT source from a file
-	 * convert to image and store the image in the file system.
-	 */
+	//Read the DOT source from a file convert to image and store the image in the file system. 
 	private void start2()
 	{
 		String dir =  System.getProperty("user.dir");
@@ -63,8 +57,7 @@ public class DOTVisualizationExample
 
 		String type = "gif";
 		//    String type = "dot, fig, pdf, ps, svg, png, plain"; 
-		
-		
+		 
 		String repesentationType= "dot";
 		//		String repesentationType= "neato, fdp, sfdp, twopi, circo"; 
 		
