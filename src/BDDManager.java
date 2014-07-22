@@ -234,10 +234,10 @@ public class BDDManager {
             frame.getContentPane().add(imageLabel); 
             //Display the window.
             frame.pack();
-            frame.setVisible(true);
             frame.setLocation(200,200); 
             frame.setAlwaysOnTop(true);
-            frame.requestFocus(); 
+            frame.requestFocus();
+            frame.setVisible(true); 
             
     	} catch (IOException e) {
     		System.out.println(e);
