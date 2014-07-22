@@ -50,7 +50,7 @@ public class DOTManager
 		}
 	}
 
-	//Decrease the image size (dpi). 
+	//Decrease the image size (dpi) . 
 	public void decreaseDpi() {
 		if (this.currentDpiPos > 0) {
 			--this.currentDpiPos;

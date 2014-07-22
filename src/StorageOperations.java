@@ -3,8 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 import redis.clients.jedis.Jedis;
 
-/*
- * StorageOperations.java
+/* StorageOperations.java
  *
  * Created on 08 July 2014, 20:31
  *

@@ -49,7 +49,7 @@ public class DOTVisualizationExample
 	}
 
 	/**
-	 * Read the DOT source from a file,
+	 * Read the DOT source from a file
 	 * convert to image and store the image in the file system.
 	 */
 	private void start2()

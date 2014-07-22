@@ -25,7 +25,7 @@ public class BDDManager {
     private String DOTResult="";
     private String common_dir =  System.getProperty("user.dir"); 
     
-    /** Creates a new instance of BDDManager */
+    /**  Creates a new instance of BDDManager */
     public BDDManager(String name) {
         this.managerName = name;
         StorageOperations.clearStorage();
@@ -238,7 +238,7 @@ public class BDDManager {
             frame.setAlwaysOnTop(true);
             frame.requestFocus();
             frame.setVisible(true); 
-            
+             
     	} catch (IOException e) {
     		System.out.println(e);
     	}  

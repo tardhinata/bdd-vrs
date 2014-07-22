@@ -15,7 +15,7 @@ public class QElement {
     private int[] key;
     private XVertex vertex;
     
-    /** Creates a new instance of QElement */
+    /** Create a new instance of QElement */
     public QElement(int[] key, XVertex vertex) { 
         this.key = key;
         this.vertex = vertex;

@@ -1,6 +1,5 @@
 /*
- * XXVertex.java
- *
+ * XXVertex.java 
  * Created on 17 July 2014, 08:34
  *
  * To change this template, choose Tools | Template Manager
