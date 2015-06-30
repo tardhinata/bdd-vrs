@@ -1,5 +1,6 @@
 BDDvrs
 ======
 
-BDD solver on top of redis.
-Developed for VRS project, TU Kaiserslautern SS2014
+We implement BDD (Binary Decision Diagram) solver on top of Redis (http://redis.io).
+
+Developed for Verification of Reactive System lecture project, TU Kaiserslautern SS2014.
